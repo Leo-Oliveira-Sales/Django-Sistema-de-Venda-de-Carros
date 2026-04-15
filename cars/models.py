@@ -9,3 +9,5 @@ class Car(models.Model):
     model_year = models.IntegerField(blank=True, null=True) # IntegerField é um campo de número inteiro.
     value = models.FloatField(blank=True, null=True) # FloatField é um campo de número decimal, blank=True permite que o campo seja deixado em branco, null=True permite que o campo seja nulo.
 
+    def __str__(self):
+        return self.model # Vai retornar o nome do modelo do carro, e não mais Car object (1), Car object (2) etc.
