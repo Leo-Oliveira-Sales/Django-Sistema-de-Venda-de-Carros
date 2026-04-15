@@ -56,7 +56,7 @@ ROOT_URLCONF = "app.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'app' / 'templates'], # Adiciona o diretório de templates do aplicativo "app" para que o Django possa encontrar os arquivos de template
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

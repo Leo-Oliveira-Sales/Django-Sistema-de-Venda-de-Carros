@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data"> <!-- Formulário para adicionar novo carro -->
+        {% csrf_token %} <!-- Token de segurança para proteção contra CSRF --> 
+        
+        <table>
+            {{ new_car_form.as_table }} <!-- Renderiza o formulário usando a formatação de tabela as_table -->
+        </table>
+
+        <input type="submit" value="Cadastrar"> <!-- Botão de envio do formulário -->
+    </form>
+{% endblock %}
