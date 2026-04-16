@@ -1,0 +1,17 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %} <!-- Adiciona o token CSRF para proteger contra ataques CSRF -->
+
+        <table>
+            {{ login_form.as_table }} <!-- Formulário de login como uma tabela -->
+        </table>
+
+        <button type="submit">Entrar</button>
+    </form>
+{% endblock %}
+
+<!-- O botão tambem pode ser feito assim: -->
+<!-- <input type="submit" value="Entrar"> -->

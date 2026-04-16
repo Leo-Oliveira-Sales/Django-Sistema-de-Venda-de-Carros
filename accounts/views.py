@@ -1,6 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 
+
+# Registro de usuário:
 def register_view(request):
     if request.method == "POST":
         user_form = UserCreationForm(request.POST)
@@ -11,3 +14,15 @@ def register_view(request):
         user_form = UserCreationForm()
     return render(request, "register.html", {"user_form": user_form})
     
+
+# Login de usuário:
+def login_view(request):
+    if request.method == "POST":
+        login_form = AuthenticationForm(request, data=request.POST)
+        if login_form.is_valid():
+            user = login_form.get_user()
+            login(request, user)
+            return redirect("cars_list")
+    else:
+        login_form = AuthenticationForm()
+    return render(request, "login.html", {"login_form": login_form})
