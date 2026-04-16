@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %} <!-- Adiciona o token CSRF para proteger contra ataques CSRF -->
+
+        <div class="form-group">
+            <label>Usuário:</label>
+            {{ user_form.username }}
+        </div>
+
+        <label>Senha:</label> <!--Tambem pode ser feito assim!-->
+        {{ user_form.password1 }}
+        {{ user_form.password1.help_text|safe }} <!-- Exibe a ajuda para a senha, usando |safe para renderizar o HTML corretamente -->
+
+        <div class="form-group">
+            <label>Confirmação de Senha:</label>
+            {{ user_form.password2 }}
+        </div>
+        
+        <div>
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+<!-- O botão tambem pode ser feito assim: -->
+<!-- <input type="submit" value="Cadastrar"> -->
