@@ -4,27 +4,6 @@ from cars.forms import CarModelForm
 from django.views import View
 
 
-# Views como funções:
-
-# # cars
-# def cars_view(request):
-#     cars = Car.objects.all().order_by("model")  
-#     search = request.GET.get("search")  
-#         cars = cars.filter(model__icontains=search)  case-insensitive
-#     return render(request, "cars.html", {"cars": cars}) 
-
-# # new_car
-# def new_cars_view(request):
-#     if request.method == "POST":
-#         new_car_form = CarModelForm(request.POST, request.FILES) 
-#         if new_car_form.is_valid():  
-#             new_car_form.save()  
-#             return redirect("cars_list")  
-#     else:
-#         new_car_form = CarModelForm()  
-#     return render(request, "new_car.html", {"new_car_form": new_car_form}) 
-
-
 # Views como classe:
 
 class CarsView(View):
@@ -49,5 +28,4 @@ class NewCarView(View):
             new_car_form.save()  # Salva o novo carro no banco de dados se for válido
             return redirect("cars_list")  # Redireciona para a lista de carros após salvar o novo carro
         return render(request, "new_car.html", {"new_car_form": new_car_form})
-    
     
