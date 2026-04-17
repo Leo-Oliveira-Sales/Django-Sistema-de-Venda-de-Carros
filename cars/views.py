@@ -1,5 +1,6 @@
 from cars.models import Car
 from cars.forms import CarModelForm
+from django.urls import reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 
@@ -37,6 +38,10 @@ class CarUpdateView(UpdateView):
     form_class = CarModelForm
     template_name = "car_update.html"
     success_url = "/cars/"  # Redireciona para a lista de carros após editar um carro
+
+    def get_success_url(self):
+        return reverse('car_detail', kwargs={'pk': self.object.pk})
+        # rever_lazy da menos erros, mas o reverse é mais simples e direto para redirecionar
 
 
 class CarDeleteView(DeleteView):
