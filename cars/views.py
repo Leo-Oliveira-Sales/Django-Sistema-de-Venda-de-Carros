@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from cars.models import Car
 from cars.forms import CarModelForm
 
+
+# Views como funções:
 # cars
 def cars_view(request):
     cars = Car.objects.all().order_by("model")  # Ordena os carros por data de criação
