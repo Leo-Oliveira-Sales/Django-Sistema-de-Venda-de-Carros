@@ -2,18 +2,34 @@ from django.shortcuts import render, redirect
 from cars.models import Car
 from cars.forms import CarModelForm
 from django.views import View
+from django.views.generic import ListView
 
 
 # Views como classe:
 
-class CarsView(View):
+# class CarsView(View):
 
-    def get(self, request):
-        cars = Car.objects.all().order_by("model")  # Ordena os carros por data de criação
-        search = request.GET.get("search")  # Obtém o valor do parâmetro de busca da URL
+#     def get(self, request):
+#         cars = Car.objects.all().order_by("model")  # Ordena os carros por data de criação
+#         search = request.GET.get("search")  # Obtém o valor do parâmetro de busca da URL
+#         if search:
+#             cars = cars.filter(model__icontains=search)  # Filtra os carros pelo modelo, usando uma busca case-insensitive
+#         return render(request, "cars.html", {"cars": cars}) # Renderiza o template "cars.html" e passa a lista de carros filtrada como contexto para o template
+
+class CarsListView(ListView):
+    model = Car
+    template_name = "cars.html"
+    context_object_name = "cars"
+
+    def get_queryset(self):
+        cars = super().get_queryset().order_by("model")  # Ordena os carros por modelo
+        search = self.request.GET.get("search") # Busca
         if search:
             cars = cars.filter(model__icontains=search)  # Filtra os carros pelo modelo, usando uma busca case-insensitive
-        return render(request, "cars.html", {"cars": cars}) # Renderiza o template "cars.html" e passa a lista de carros filtrada como contexto para o template
+        return cars  # Retorna a queryset de carros filtrada para ser usada no template
+
+
+
 
 
 class NewCarView(View):
